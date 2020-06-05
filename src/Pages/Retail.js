@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-export default class About extends Component {
+export default class Retail extends Component {
   render() {
     return (
-      <h2>Розничная сеть</h2>
-      
+      <div>Розничная сеть</div>
     )
   }
 }
