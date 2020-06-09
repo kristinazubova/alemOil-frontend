@@ -9,3 +9,28 @@
   border: none!important;
 
 }
+
+.logo {
+  width: 100px;
+  height: 50px;
+}
+/* sm */
+@media (min-width: 768px) {
+  .logo {
+      width: 100px;
+      height: 50px;
+  }
+}
+/* md */
+@media (min-width: 992px) {
+  .logo {
+      width: 150px;
+      height: 75px;
+  }
+
+  .aboutCompany {
+    font-size: 20px;
+  }
+}
+
+
