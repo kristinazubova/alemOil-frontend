@@ -26,13 +26,10 @@ function App() {
           </Switch>
         </Router>
 
-        <footer className="py-3 bg-dark position-relative">
-          <div className="container-fluid text-center text-white">@Alem oil, 2020.</div>
+        <footer className="py-3 bg-dark position-relative w-100">
+          <div className="container-fluid text-center customText">@Alem oil, 2020.</div>
         </footer>
-
-
       </Container>
-
     </>
   );
 }
