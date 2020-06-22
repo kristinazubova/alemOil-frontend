@@ -11,13 +11,32 @@ export default class FormWholesales extends Component {
     super(props)
 
     this.state = {
-      exportWay: {
-        isOilBase: false,
+      products: [{
+        label: 'Бензин АИ-92',
+        id: 'petrol92',
+        isEnabled: true,
+        volume: ''
       },
+      {
+        label: 'Бензин АИ-95',
+        id: 'petrol95',
+        isEnabled: false,
+        volume: ''
+      },
+      {
+        label: 'Дизельное топливо летнее',
+        id: 'dieselSummer',
+        isEnabled: false,
+        volume: ''
+      },
+      {
+        label: 'Дизельное топливо зимнее',
+        id: 'dieselWinter',
+        isEnabled: false,
+        volume: ''
+      }],
       formItems: {
         companyName: '',
-        productType: '',
-        productVolume: '',
         lawAdress: '',
         companyBIN: '',
         companyIIK: '',
@@ -32,6 +51,8 @@ export default class FormWholesales extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.toggleCheckbox = this.toggleCheckbox.bind(this);
+    this.handleVolumeChange = this.handleVolumeChange.bind(this);
   }
 
   handleInputChange(event) {
@@ -40,8 +61,7 @@ export default class FormWholesales extends Component {
     let value = target.value;
 
     this.setState((state) => {
-      
-      if (target.type === 'radio') {
+      if (name === 'exportType') {
         if (target.id === 'oilBase') {
           value = 'Наливом с нефтебазы'
           state.formItems.targetExport = 'Для реализации конечному потребителю'
@@ -51,53 +71,80 @@ export default class FormWholesales extends Component {
           state.formItems.targetExport = ''
         }
       }
-
+       
       state.formItems[name] = value;
 
       return state
     });
   }
 
+  toggleCheckbox(index) {
+    let products = this.state.products;
+    products[index].isEnabled = !products[index].isEnabled
+
+    this.setState({
+      products
+    })
+  }
+
+  handleVolumeChange(index, event) {
+    const target = event.target;
+
+    let products = this.state.products;
+    products[index].volume = target.value;
+        
+    this.setState({
+      products
+    })
+  }
+
   render() {
+    let products = this.state.products;
     let formItems = this.state.formItems;
 
     const sendForm = (e) => {
       e.preventDefault()
-      axios.post('http://localhost:3000/questionaries', {
-       
-      })
+
+      let order = products.map((product) => ({
+        productName: product.label,
+        productVolume: product.volume
+      }))
+      axios.post('http://localhost:3001/questionaries', {...formItems, order})
     }
+
+    const productsList = products.map((product, index) =>
+      <Form.Row key={product.id}>
+        <Form.Group as={Col} xs={12} md={7}>
+          <Form.Label>Тип нефтепродукта</Form.Label>
+          <Form.Check 
+            type="checkbox" 
+            label={product.label} 
+            name="order" 
+            id={product.id + 'Checkbox'}
+            checked={product.isEnabled}
+            onChange={(e) => this.toggleCheckbox(index, e)}
+          >
+          </Form.Check>
+        </Form.Group>
+        <Form.Group as={Col} xs={12} md={5} >
+          <Form.Label>Объём в литрах</Form.Label>
+          <Form.Control
+            xs={12}
+            name="productVolume"
+            id={product.id}
+            value={product.volume}
+            onChange={(e) => this.handleVolumeChange(index, e)}
+            disabled={!product.isEnabled}
+          />
+        </Form.Group>
+      </Form.Row>
+    )
 
     return (
       <Form className="border p-3 my-3">
         <h4 className="text-center p-3">Форма заявки на оптовую закупку</h4>
 
-        <Form.Row>
-          <Form.Group as={Col} xs={12} md={7}>
-            <Form.Label>Выберите тип нефтепродукта</Form.Label>
-            <Form.Control
-              as="select"
-              name="productType"
-              value={this.state.productType}
-              onChange={this.handleInputChange}
-            >
-              <option>АИ-92</option>
-              <option>АИ-95</option>
-              <option>ДТ(летнее)</option>
-              <option>ДТ(зимнее)</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group as={Col} xs={12} md={5}>
-            <Form.Label>Объём в литрах</Form.Label>
-            <Form.Control
-              xs={12}
-              name="productVolume"
-              value={this.state.productVolume}
-              onChange={this.handleInputChange}
-            />
-          </Form.Group>
-        </Form.Row>
-
+        {productsList}
         <h5 className="text-center p-3">Заполните реквизиты компании для выставления счета</h5>
 
         <Form.Group controlId="formCompanyName">
