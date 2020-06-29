@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import MaterialIcon from 'material-icons-react';
 import axios from 'axios'
+import config from './../Config/index'
 
 export default class About extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ export default class About extends Component {
         password: this.state.password
       }
 
-      axios.post('http://localhost:3001/auth', userData, { withCredentials: true })
+      axios.post(`${config.backendURL}/auth`, userData, { withCredentials: true })
         .then(res => {
           if (res.status === 200) {
             this.props.history.push('/updatePrices')

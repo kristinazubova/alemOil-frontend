@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table'
 import axios from 'axios'
+import config from './../Config/index'
 
 export default class About extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ export default class About extends Component {
   }
 
   async componentDidMount() {
-    let pricesData = await axios.get('http://localhost:3001/prices/')
+    let pricesData = await axios.get(`${config.backendURL}/prices`)
     const priceList = pricesData.data;
     this.setState({ priceList });
   }

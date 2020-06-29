@@ -16,7 +16,6 @@ import Auth from './Pages/Auth'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-
 function App() {
   return (
     <>

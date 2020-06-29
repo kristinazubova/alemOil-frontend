@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Table from 'react-bootstrap/Table'
-
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
+
 import axios from 'axios'
+
+import config from './../Config/index'
 
 export default class About extends Component {
 
@@ -54,7 +54,7 @@ export default class About extends Component {
     const updateTable = (e) => {
       e.preventDefault()
 
-      axios.post('http://localhost:3001/prices', this.state.products, { withCredentials: true })
+      axios.post(`${config.backendURL}/prices`, this.state.products, { withCredentials: true })
         .then(() => {
           alert('Цены успешно обновлены!')
         })

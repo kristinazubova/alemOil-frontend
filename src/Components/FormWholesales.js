@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
+import config from './../Config/index'
 
 import './../App.css';
 
@@ -110,7 +111,7 @@ export default class FormWholesales extends Component {
         productVolume: product.volume
       }))
 
-      axios.post('http://localhost:3001/questionaries', { ...formItems, order })
+      axios.post(`${config.backendURL}/questionaries`, { ...formItems, order })
     }
 
   
