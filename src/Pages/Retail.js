@@ -8,9 +8,9 @@ export default class About extends Component {
   render() {
     return (
       <Container fluid className="mx-0 px-0">
-        <Row className="w-100">
+        <Row className="w-100 px-3 mx-0">
           <Col xs={0} md={1} lg={2} className="px-0 mx-0"></Col>
-          <Col xs={12} md={10} lg={8} className="px-0 mx-0 my-5">
+          <Col xs={12} md={10} lg={8} className="mx-0 my-5">
             <h4 className="text-center p-4">Наша розничная сеть АЗС</h4>
             <Table className="w-100">
               <tbody>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -24,13 +24,13 @@ export default class FormWholesales extends Component {
         volume: ''
       },
       {
-        label: 'Дизельное топливо летнее',
+        label: 'Диз. топливо летнее',
         id: 'dieselSummer',
         isEnabled: false,
         volume: ''
       },
       {
-        label: 'Дизельное топливо зимнее',
+        label: 'Диз. топливо зимнее',
         id: 'dieselWinter',
         isEnabled: false,
         volume: ''
@@ -47,7 +47,8 @@ export default class FormWholesales extends Component {
         targetExport: '',
         email: '',
         phoneNum: ''
-      }
+      },
+      validated: false
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -71,7 +72,7 @@ export default class FormWholesales extends Component {
           state.formItems.targetExport = ''
         }
       }
-       
+
       state.formItems[name] = value;
 
       return state
@@ -92,7 +93,7 @@ export default class FormWholesales extends Component {
 
     let products = this.state.products;
     products[index].volume = target.value;
-        
+
     this.setState({
       products
     })
@@ -103,77 +104,98 @@ export default class FormWholesales extends Component {
     let formItems = this.state.formItems;
 
     const sendForm = (e) => {
-      e.preventDefault()
-
+      
       let order = products.map((product) => ({
         productName: product.label,
         productVolume: product.volume
       }))
-      axios.post('http://localhost:3001/questionaries', {...formItems, order})
+
+      axios.post('http://localhost:3001/questionaries', { ...formItems, order })
     }
 
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      
+      const form = event.currentTarget;
+      if (form.checkValidity() === false) {
+        event.stopPropagation();
+
+        this.setState({
+          validated: true
+        });
+      } else {
+        sendForm();
+      }
+    };
+
     const productsList = products.map((product, index) =>
-      <Form.Row key={product.id}>
-        <Form.Group as={Col} xs={12} md={7}>
-          <Form.Label>Тип нефтепродукта</Form.Label>
-          <Form.Check 
-            type="checkbox" 
-            label={product.label} 
-            name="order" 
+      <Form.Row key={product.id} className="p-2 align-items-center">
+        <Form.Group as={Col} xs={6} md={4} lg={3} className="m-0">
+          <Form.Check
+            type="checkbox"
+            label={product.label}
+            name="order"
             id={product.id + 'Checkbox'}
             checked={product.isEnabled}
             onChange={(e) => this.toggleCheckbox(index, e)}
           >
           </Form.Check>
         </Form.Group>
-        <Form.Group as={Col} xs={12} md={5} >
-          <Form.Label>Объём в литрах</Form.Label>
+        <Form.Group as={Col} xs={6} md={8} lg={9} className="m-0">
           <Form.Control
-            xs={12}
+            type="number"
+            xs={5}
             name="productVolume"
             id={product.id}
             value={product.volume}
             onChange={(e) => this.handleVolumeChange(index, e)}
             disabled={!product.isEnabled}
+            placeholder="Объем в литрах"
+            className="m-0"
+            required
           />
         </Form.Group>
       </Form.Row>
     )
 
     return (
-      <Form className="border p-3 my-3">
+      <Form noValidate validated={this.state.validated} onSubmit={handleSubmit} className="border p-3 my-3">
         <h4 className="text-center p-3">Форма заявки на оптовую закупку</h4>
-
+        <p className="text-center">Выберите тип продукта и укажите объём</p>
         {productsList}
         <h5 className="text-center p-3">Заполните реквизиты компании для выставления счета</h5>
 
         <Form.Group controlId="formCompanyName">
-          <Form.Label>Название компании</Form.Label>
+          <Form.Label>Название компании*</Form.Label>
           <Form.Control
             placeholder="ИП Иванов И.И"
             name="companyName"
             value={this.state.companyName}
             onChange={this.handleInputChange}
+            required
           />
         </Form.Group>
 
         <Form.Group controlId="formCompanyAddress">
-          <Form.Label>Юридический адрес</Form.Label>
+          <Form.Label>Юридический адрес*</Form.Label>
           <Form.Control
             name="lawAdress"
             placeholder="001234, Казахстан, Восточно-Казахстанская обл., Зыряновский район"
             value={this.state.lawAdress}
             onChange={this.handleInputChange}
+            required
           />
         </Form.Group>
 
         <Form.Row>
           <Form.Group controlId="formBIN" as={Col} xs={12} md={4}>
-            <Form.Label>БИН</Form.Label>
+            <Form.Label>БИН*</Form.Label>
             <Form.Control
               name="companyBIN"
               value={this.state.companyBIN}
               onChange={this.handleInputChange}
+              required
             />
           </Form.Group>
           <Form.Group controlId="formIIK" as={Col} xs={12} md={4}>
@@ -197,20 +219,22 @@ export default class FormWholesales extends Component {
 
         <Form.Row>
           <Form.Group as={Col} xs={12} md={3} controlId="formKBE">
-            <Form.Label>КБе</Form.Label>
+            <Form.Label>КБе*</Form.Label>
             <Form.Control
               name="companyKBE"
               value={this.state.companyKBE}
               onChange={this.handleInputChange}
+              required
             />
           </Form.Group>
 
           <Form.Group as={Col} xs={12} md={9} controlId="formBankName">
-            <Form.Label>Наименование банка</Form.Label>
+            <Form.Label>Наименование банка*</Form.Label>
             <Form.Control
               name="bankName"
               value={this.state.bankName}
               onChange={this.handleInputChange}
+              required
             />
           </Form.Group>
         </Form.Row>
@@ -250,29 +274,31 @@ export default class FormWholesales extends Component {
 
         <Form.Row>
           <Form.Group as={Col} controlId="formEmail">
-            <Form.Label>Email</Form.Label>
+            <Form.Label>Email*</Form.Label>
             <Form.Control
               type="email"
               name="email"
               placeholder="ivanov@email.com"
               value={this.state.email}
               onChange={this.handleInputChange}
+              required
             />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formPhone">
-            <Form.Label>Номер телефона</Form.Label>
+            <Form.Label>Номер телефона*</Form.Label>
             <Form.Control
               type="tel"
               name="phoneNum"
               value={this.state.phoneNum}
               onChange={this.handleInputChange}
               placeholder="+7777-123-45-67"
+              required
             />
           </Form.Group>
         </Form.Row>
         <Form.Row className="d-flex justify-content-center">
-          <Button type="submit" className="btn-orange" onClick={sendForm}>
+          <Button type="submit" className="btn-orange">
             Отправить
         </Button>
         </Form.Row>
