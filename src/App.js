@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { withRouter } from "react-router";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -16,40 +17,45 @@ import Auth from './Pages/Auth'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-function App() {
-  return (
-    <>
-      <Container fluid className="d-flex flex-column mx-0 px-0 min-vh-100 justify-content-between">
-        <Header />
+const HeaderWithRouter = withRouter(Header);
+class App extends Component {
+  render() {
+    return (
+      <>
+        <Container fluid className="d-flex flex-column mx-0 px-0 min-vh-100 justify-content-between">
 
-        <Router>
-          <Switch>
-            <Route exact path="/" component={About} />
-            <Route exact path="/retail" component={Retail} />
-            <Route exact path="/wholesales" component={Wholesales} />
-            <Route exact path="/contacts" component={Contacts} />
-            <Route exact path="/updatePrices" component={UpdatePrices} />
-            <Route exact path="/auth" component={Auth} />
-          </Switch>
-        </Router>
 
-        <footer>
-          <Row className="py-3 bg-dark w-100 mx-0 px-3">
-            <Col className="px-0 mx-0"></Col>
-            <Col xs={6} md={5} lg={4} className="px-0 mx-0">
-              <div className="customText mx-0 px-0">©Alem oil, 2020.</div>
-            </Col>
-            <Col xs={6} md={5} lg={4} className="px-0 mx-0">
-              <div className="d-flex mx-0 px-0 justify-content-end">
-                <a href="/auth" className="text-center customText">Для сотрудников</a>
-              </div>
-            </Col>
-            <Col className="px-0 mx-0"></Col>
-          </Row>
-        </footer>
-      </Container>
-    </>
-  );
+          <Router>
+            <HeaderWithRouter />
+            <Switch>
+              <Route exact path="/" component={About} />
+              <Route exact path="/retail" component={Retail} />
+              <Route exact path="/wholesales" component={Wholesales} />
+              <Route exact path="/contacts" component={Contacts} />
+              <Route exact path="/updatePrices" component={UpdatePrices} />
+              <Route exact path="/auth" component={Auth} />
+            </Switch>
+          </Router>
+
+          <footer>
+            <Row className="py-3 bg-dark w-100 mx-0 px-3">
+              <Col className="px-0 mx-0"></Col>
+              <Col xs={6} md={5} lg={4} className="px-0 mx-0">
+                <div className="customFooterText mx-0 px-0">©Alem oil, 2020.</div>
+              </Col>
+              <Col xs={6} md={5} lg={4} className="px-0 mx-0">
+                <div className="d-flex mx-0 px-0 justify-content-end">
+                  <a href="/auth" className="text-center customFooterText forStaff">Для сотрудников</a>
+                </div>
+              </Col>
+              <Col className="px-0 mx-0"></Col>
+            </Row>
+          </footer>
+        </Container>
+      </>
+    );
+  }
 }
+
 
 export default App;

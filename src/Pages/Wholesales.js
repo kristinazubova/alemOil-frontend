@@ -14,7 +14,7 @@ export default class About extends Component {
         <Row>
           <Col></Col>
           <Col xs={12} md={8}>
-            <h3 className="m-4 text-center">Оптовые продажи</h3>
+            <h3 className="m-4 text-center">Оптовая продажа</h3>
             <Prices />
             <FormWholesales />
           </Col>

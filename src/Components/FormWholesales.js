@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -105,19 +105,26 @@ export default class FormWholesales extends Component {
     let formItems = this.state.formItems;
 
     const sendForm = (e) => {
-      
+
       let order = products.map((product) => ({
         productName: product.label,
         productVolume: product.volume
       }))
 
       axios.post(`${config.backendURL}/questionaries`, { ...formItems, order })
+        .then(res => {
+          console.log(res)
+          alert('Заявка успешно отправлена! Менеджер свяжется с вами в ближайшее время!')
+        }).catch(err => {
+          alert('Ошибка! Заявка не отправлена!')
+        })
+
     }
 
-  
+
     const handleSubmit = (event) => {
       event.preventDefault();
-      
+
       const form = event.currentTarget;
       if (form.checkValidity() === false) {
         event.stopPropagation();
@@ -161,9 +168,9 @@ export default class FormWholesales extends Component {
     )
 
     return (
-      <Form noValidate validated={this.state.validated} onSubmit={handleSubmit} className="border p-3 my-3">
-        <h4 className="text-center p-3">Форма заявки на оптовую закупку</h4>
-        <p className="text-center">Выберите тип продукта и укажите объём</p>
+      <Form noValidate validated={this.state.validated} onSubmit={handleSubmit} className="border p-3 my-5">
+        <h3 className="text-center p-3">Форма заявки на оптовую закупку</h3>
+        <h5 className="text-center">Выберите тип продукта и укажите объём</h5>
         {productsList}
         <h5 className="text-center p-3">Заполните реквизиты компании для выставления счета</h5>
 
@@ -182,7 +189,7 @@ export default class FormWholesales extends Component {
           <Form.Label>Юридический адрес*</Form.Label>
           <Form.Control
             name="lawAdress"
-            placeholder="001234, Казахстан, Восточно-Казахстанская обл., Зыряновский район"
+            placeholder="001234, Казахстан, Восточно-Казахстанская обл., район Алтай, г. Алтай, ул. Тәуелсіздік, 3"
             value={this.state.lawAdress}
             onChange={this.handleInputChange}
             required
@@ -299,7 +306,7 @@ export default class FormWholesales extends Component {
           </Form.Group>
         </Form.Row>
         <Form.Row className="d-flex justify-content-center">
-          <Button type="submit" className="btn-orange">
+          <Button type="submit" className="btn-orange my-4">
             Отправить
         </Button>
         </Form.Row>

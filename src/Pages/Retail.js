@@ -49,7 +49,8 @@ export default class About extends Component {
                 src="https://yandex.ru/map-widget/v1/?um=constructor%3A5bc4f84267d7cb7dc51969ec16ec76b814d91c2cbdc2d6fd2346f9eac564fdfc&amp;source=constructor"
                 width="100%"
                 height="533"
-                frameborder="0">
+                frameborder="0"
+                title="Карта расположения АЗС">
               </iframe>
             </div>
           </Col>

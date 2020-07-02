@@ -21,15 +21,20 @@ export default class Contacts extends Component {
               </div>
               <div className="d-flex mx-2 my-4 align-items-center">
                 <MaterialIcon icon="call" size={30} />
-                <p className="my-0 mx-2">Телефон для связи: +77233500000</p>
+                <p className="my-0 mx-2">Телефон для связи: +77233530790</p>
               </div>
               <div className="d-flex mx-2 my-4 align-items-center">
-              <MaterialIcon icon="alternate_email" size={30} />
-              <p className="my-0 mx-2">E-mail: alemoil@mail.ru</p>
-            </div>
-            <div className="my-5 officeMap" responsive>
-            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A04e0a612cf41b6d200f171ddf13049e24d85d075ca627d9b5e6e95c737aee7ef&amp;source=constructor" width="100%" height="520px" frameborder="0"></iframe>
-            </div>
+                <MaterialIcon icon="alternate_email" size={30} />
+                <p className="my-0 mx-2">E-mail: orders@alemoil.com</p>
+              </div>
+              <div className="my-5 officeMap">
+                <iframe
+                  src="https://yandex.ru/map-widget/v1/?um=constructor%3A04e0a612cf41b6d200f171ddf13049e24d85d075ca627d9b5e6e95c737aee7ef&amp;source=constructor"
+                  width="100%"
+                  height="520px"
+                  title="Карта расположения офиса"> 
+            </iframe>
+              </div>
             </Form.Group>
           </Col>
           <Col></Col>

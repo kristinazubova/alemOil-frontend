@@ -30,7 +30,7 @@ export default class About extends Component {
   }
 
   async componentDidMount() {
-    let pricesData = await axios.get(`${config.backendURL}/prices`)
+    let pricesData = await axios.get(`${config.backendURL}/prices/`)
     const priceList = pricesData.data;
     this.setState({ priceList });
   }
@@ -40,8 +40,8 @@ export default class About extends Component {
 
     return (
       <div>
-        <h4 className="m-4 text-center ">Текущие цены</h4>
-        <Table responsive="sm" bordered className="flex-md-column">
+        <h5 className="m-4 text-center ">Текущие цены*</h5>
+        <Table responsive="sm" bordered className="flex-md-column mb-1">
           <thead>
             <tr>
               <th></th>
@@ -68,9 +68,8 @@ export default class About extends Component {
             </tr>
           </tbody>
         </Table>
+        <p className="py-0 my-0">*цены указаны в тенге за 1 литр</p>
       </div>
     )
   }
 }
-
-

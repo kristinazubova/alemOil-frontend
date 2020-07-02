@@ -29,10 +29,10 @@ export default class About extends Component {
       }],
 
       products: [
-        { id: 1, name: 'АИ-92', priceOB: 123, priceOS: 125 },
-        { id: 2, name: 'АИ-95', priceOB: 123, priceOS: 125 },
-        { id: 3, name: 'ДТл', priceOB: 123, priceOS: 125 },
-        { id: 4, name: 'ДТз', priceOB: 123, priceOS: 125 }
+        { id: 1, name: 'АИ-92', priceOB: 140, priceOS: 150 },
+        { id: 2, name: 'АИ-95', priceOB: 157, priceOS: 168 },
+        { id: 3, name: 'ДТл', priceOB: 179, priceOS: 185 },
+        { id: 4, name: 'ДТз', priceOB: '-', priceOS: '-' }
       ]
     }
   }
