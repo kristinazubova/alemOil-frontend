@@ -40,7 +40,7 @@ export default class Header extends Component {
     const { location } = this.props;
 
     return (
-      <Container fluid className="mx-0 px-0 ">
+      <Container fluid className="mx-0 px-0">
         <Row className="mx-0 px-0">
 
           <Navbar variant="dark" collapseOnSelect expand="md" bg="dark" className="d-flex align-content-center mx-0 px-3 py-2 w-100">

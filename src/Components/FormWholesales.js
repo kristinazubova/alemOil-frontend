@@ -153,14 +153,14 @@ export default class FormWholesales extends Component {
         <Form.Group as={Col} xs={6} md={8} lg={9} className="m-0">
           <Form.Control
             type="number"
-            xs={5}
+            xs={6}
             name="productVolume"
             id={product.id}
             value={product.volume}
             onChange={(e) => this.handleVolumeChange(index, e)}
             disabled={!product.isEnabled}
             placeholder="Объем в литрах"
-            className="m-0"
+            className="m-0 px-1 text-center"
             required
           />
         </Form.Group>

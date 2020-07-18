@@ -9,11 +9,11 @@ import MaterialIcon from 'material-icons-react';
 export default class Contacts extends Component {
   render() {
     return (
-      <Container fluid className="py-4">
-        <Row className="w-100">
+      <Container fluid className="mx-0 px-0">
+        <Row className="w-100 mx-0">
           <Col></Col>
-          <Col xs={12} md={10} lg={8} className="lg-m-5">
-            <Form.Group className="p-5 shadow">
+          <Col xs={12} md={10} lg={8} className="px-0 mx-0">
+            <Form.Group className=" px-4 shadow">
               <h3 className="m-4 text-center">Контакты</h3>
               <div className="d-flex mx-2 my-4 align-items-center">
                 <MaterialIcon icon="location_on" size={30} />
