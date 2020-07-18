@@ -1,3 +1,3 @@
 export default {
-  backendURL: 'http://localhost:3001'
+  backendURL: 'http://www.alemoil.com/api/' // 'http://localhost:3001'
 }
