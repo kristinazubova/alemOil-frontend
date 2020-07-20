@@ -25,7 +25,7 @@ export default class Contacts extends Component {
               </div>
               <div className="d-flex mx-2 my-4 align-items-center">
                 <MaterialIcon icon="alternate_email" size={30} />
-                <p className="my-0 mx-2">E-mail: orders@alemoil.com</p>
+                <p className="my-0 mx-2">E-mail: opt@alemoil.com</p>
               </div>
               <div className="my-5 officeMap">
                 <iframe
