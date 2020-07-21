@@ -17,11 +17,11 @@ export default class Contacts extends Component {
               <h3 className="m-4 text-center">Контакты</h3>
               <div className="d-flex mx-2 my-4 align-items-center">
                 <MaterialIcon icon="location_on" size={30} />
-                <p className="my-0 mx-2">Наш адрес: Казахстан, Восточно-Казахстанская область, Алтай район, ст. Бухтарма</p>
+                <p className="my-0 mx-2">Наш адрес: Казахстан, Восточно-Казахстанская область, Алтай район, ст. Бухтарма, ул. Железнодорожная д.10</p>
               </div>
               <div className="d-flex mx-2 my-4 align-items-center">
                 <MaterialIcon icon="call" size={30} />
-                <p className="my-0 mx-2">Телефон для связи: +77233530790</p>
+                <p className="my-0 mx-2">Телефон для связи: +7(72335)30790 или +7(771)3051188</p>
               </div>
               <div className="d-flex mx-2 my-4 align-items-center">
                 <MaterialIcon icon="alternate_email" size={30} />
