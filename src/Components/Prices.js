@@ -60,7 +60,7 @@ export default class About extends Component {
               <td className="text-center">{priceList.dieselWinter.fromOilBase}</td>
             </tr>
             <tr>
-              <td>Талоны для АЗС</td>
+              <td>Талоны для отпуска с АЗС</td>
               <td className="text-center">{priceList.petrol92.fromOilStation}</td>
               <td className="text-center">{priceList.petrol95.fromOilStation}</td>
               <td className="text-center">{priceList.dieselSummer.fromOilStation}</td>
