@@ -38,6 +38,16 @@
   font-size: 16px!important;
 }
 
+.navbar-dark .navbar-nav a.nav-link {
+  color: rgb(255 255 255 / 84%);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.navbar-collapse .navbar-nav .nav-link {
+  padding: 15px 0;
+}
+
 /* sm */
 @media (min-width: 768px) {
   .logo {

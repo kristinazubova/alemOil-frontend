@@ -39,16 +39,16 @@ class App extends Component {
 
           <footer>
             <Row className="py-3 bg-dark w-100 mx-0 px-3">
-              <Col className="px-0 mx-0"></Col>
               <Col xs={6} md={5} lg={4} className="px-0 mx-0">
-                <div className="customFooterText mx-0 px-0">©Alem oil, 2020.</div>
+                <div className="customFooterText mx-0 px-0">©Alem oil, 2020-{new Date().getFullYear()}</div>
               </Col>
+              <Col className="px-0 mx-0"></Col>
+              <Col className="px-0 mx-0"></Col>
               <Col xs={6} md={5} lg={4} className="px-0 mx-0">
                 <div className="d-flex mx-0 px-0 justify-content-end">
                   <a href="/auth" className="text-center customFooterText forStaff">Для сотрудников</a>
                 </div>
               </Col>
-              <Col className="px-0 mx-0"></Col>
             </Row>
           </footer>
         </Container>
