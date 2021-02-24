@@ -44,10 +44,6 @@
   font-weight: 600;
 }
 
-.navbar-collapse .navbar-nav .nav-link {
-  padding: 15px 0;
-}
-
 /* sm */
 @media (min-width: 768px) {
   .logo {
